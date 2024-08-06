@@ -4,13 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local-Storage</title>
+    <style>
+        body{
+            background-color: azure;
+        }
+        .logout{
+            border-radius: 2px;
+            background-color: bisque;
+           margin-top: 200px;
+           margin-left: 30px;
+        }
+
+        .logout:hover{
+            cursor: pointer;
+        }
+        .text{
+            margin-left:  450px;
+        }
+        .text:hover{
+            cursor: pointer;
+        }
+        .save{
+            margin-left: 30px;
+        }
+        .save:hover{
+            cursor: pointer;
+        }
+        .message{
+            margin-left: 500px;
+            margin-top: 70px;
+        }
+    </style>
 </head>
 <body>
-    <input type="text" placeholder="Enter Your Name">
-    <button >Save</button>
-    <button >Logout</button>
-    <p id="message">
-        Hello Everyone
-    </p>
+    <body>
+        <input type="text" class="text" id="name" placeholder="Enter Your Name">
+        <button id="save" class="save" onclick="save()">Save</button>
+        <button id="logout" class="logout" onclick="logout()">Logout</button>
+        <h1 id="message" class="message">
+            Hello Everyone
+        </h1>
+ <script>
+
+        const nameElement = document.getElementById(`name`);
+        const messageElement = document.getElementById(`message`);
+        const btnElement = document.getElementById(`save`);
+    
+    
+            function save(){
+                
+                const userName = nameElement.value;
+                localStorage.setItem(`name`,userName);
+    
+                if(!userName){
+                    alert('please enter your name');
+                    return;
+                }
+    
+                
+                messageElement.innerText =`Hello ${userName}`;
+    
+                
+                btnElement.style.display = `none`;
+                nameElement.style.display= `none`;
+            }
+    
+            const userName = localStorage.getItem(`name`);
+    
+            if(userName){
+                messageElement.innerText = `Hello ${userName}`;
+                btnElement.style.display = `none`;
+                nameElement.style.display = `none`;
+            }
+            function logout(){
+                localStorage.removeItem(`name`);
+                window.location.reload();
+            }
+    
+    
+         </script>
 </body>
 </html>
